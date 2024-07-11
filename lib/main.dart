@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jarkom_ar/komponen_list_screen.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
 
 void main() {
@@ -16,7 +17,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Parts of Computer'),
+      // home: const MyHomePage(title: 'Parts of Computer'),
+      home: const KomponenListScreen(),
     );
   }
 }
@@ -41,9 +43,6 @@ class _MyHomePageState extends State<MyHomePage> {
         alt: 'A 3D model of an astronaut',
         ar: true,
         autoRotate: true,
-        disableZoom: true,
-        arModes: [],
-        cameraControls: true,
 
       ),
     );
