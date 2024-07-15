@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:jarkom_ar/komponen_list_screen.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:jarkom_ar/const/color_const.dart';
+import 'package:jarkom_ar/home_screen.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
 
 void main() {
@@ -11,14 +14,29 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+    return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.deepPurple,
+          background: bgColor,
+        ),
+        filledButtonTheme: FilledButtonThemeData(
+          style: ButtonStyle(
+            backgroundColor: WidgetStateColor.resolveWith((states) => primaryColor),
+          ),
+        ),
+        listTileTheme: ListTileThemeData(
+          tileColor: Colors.grey,
+        ),
         useMaterial3: true,
       ),
       // home: const MyHomePage(title: 'Parts of Computer'),
-      home: const KomponenListScreen(),
+      home: const HomeScreen(),
     );
   }
 }
@@ -43,7 +61,6 @@ class _MyHomePageState extends State<MyHomePage> {
         alt: 'A 3D model of an astronaut',
         ar: true,
         autoRotate: true,
-
       ),
     );
   }
