@@ -25,12 +25,22 @@ class MyApp extends StatelessWidget {
           seedColor: Colors.deepPurple,
           background: bgColor,
         ),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.transparent
+        ),
         filledButtonTheme: FilledButtonThemeData(
           style: ButtonStyle(
             backgroundColor: WidgetStateColor.resolveWith((states) => primaryColor),
           ),
         ),
-        listTileTheme: ListTileThemeData(
+        iconButtonTheme: IconButtonThemeData(
+          style:ButtonStyle(
+            backgroundColor: WidgetStateColor.resolveWith((states) => primaryColor),
+            iconColor: WidgetStateColor.resolveWith((states) => darkColor),
+
+          )
+        ),
+        listTileTheme: const ListTileThemeData(
           tileColor: Colors.grey,
         ),
         useMaterial3: true,
@@ -41,27 +51,3 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Model Viewer')),
-      body: const ModelViewer(
-        backgroundColor: Color.fromARGB(0xFF, 0xEE, 0xEE, 0xEE),
-        src: 'assets/motherboard_am4.glb',
-        alt: 'A 3D model of an astronaut',
-        ar: true,
-        autoRotate: true,
-      ),
-    );
-  }
-}

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jarkom_ar/componen_screen.dart';
 import 'package:jarkom_ar/const/color_const.dart';
 import 'package:jarkom_ar/model/componen_model.dart';
 
@@ -17,10 +18,13 @@ class _KomponenListScreenState extends State<KomponenListScreen> {
       body: Stack(
         children: [
           Center(
-            child: Image.asset(
-              "assets/cuate.png",
-              width: Get.width,
-              fit: BoxFit.fitWidth,
+            child: Transform.flip(
+              flipX: true,
+              child: Image.asset(
+                "assets/cuate.png",
+                width: Get.width,
+                fit: BoxFit.fitWidth,
+              ),
             ),
           ),
           Container(
@@ -33,7 +37,7 @@ class _KomponenListScreenState extends State<KomponenListScreen> {
             child: ListView(
               children: items
                   .map(
-                    (e) => _listItem(e.name ?? ''),
+                    (e) => _listItem(e),
                   )
                   .toList(),
             ),
@@ -45,29 +49,46 @@ class _KomponenListScreenState extends State<KomponenListScreen> {
               "assets/char.png",
               height: Get.width / 3.5,
             ),
+          ),
+          Positioned(
+            top: 25,
+            left: 20,
+            child: IconButton.filled(
+              onPressed: () => Get.back(),
+              icon: const Icon(Icons.arrow_back),
+            ),
           )
         ],
       ),
     );
   }
 
-  Widget _listItem(String title) {
-    return Container(
-      width: Get.width - (Get.width / 2.2),
-      margin: const EdgeInsets.only(bottom: 10),
-      decoration: BoxDecoration(
-        border: Border.all(color: darkColor),
-        // color: Colors.grey
+  Widget _listItem(Components e) {
+    return GestureDetector(
+      onTap: () => Get.to(
+        ComponentScreen(components: e),
+        transition: Transition.rightToLeftWithFade,
+        duration: Duration(seconds: 1),
       ),
-      padding: const EdgeInsets.all(5),
-      child: Text(title),
+      child: Container(
+        width: Get.width - (Get.width / 2.2),
+        margin: const EdgeInsets.only(bottom: 10),
+        decoration: BoxDecoration(
+          border: Border.all(color: darkColor),
+          // color: Colors.grey
+        ),
+        padding: const EdgeInsets.all(5),
+        child: Text(e.name ?? ''),
+      ),
     );
   }
 
   List<Components> items = [
     Components(
-      name: "Motherboard",
-    ),
+        name: "Motherboard",
+        image: "assets/motherboard_am4.glb",
+        text:
+            "Mainboard adalah komponen komputer yang paling utama karena berisi sistem BIOS, chipset, soket processor, soket memori, soket kartu grafis, dan berbagai soket tambahan. Fungsi dari mainboard sendiri adalah untuk meletakan semua komponen yang dibutuhkan dalam sebuah komputer."),
     Components(
       name: "Processor",
     ),
