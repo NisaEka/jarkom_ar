@@ -24,13 +24,17 @@ class ComponentScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 10),
             ),
           ),
-          ModelViewer(
-            backgroundColor: Colors.transparent,
-            src: components.image ?? '',
-            alt: 'A 3D model of an astronaut',
-            ar: true,
-            autoRotate: true,
-          ),
+          components.image == null
+              ? const Center(
+                  child: Text("Model Error"),
+                )
+              : ModelViewer(
+                  backgroundColor: Colors.transparent,
+                  src: components.image ?? '',
+                  ar: true,
+                  autoRotate: true,
+                  autoPlay: true,
+                ),
           Positioned(
             top: 25,
             left: 20,
@@ -51,12 +55,11 @@ class ComponentScreen extends StatelessWidget {
                   return Container(
                     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                     decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(15),
-                        topRight: Radius.circular(15),
-                      ),
-                      color: whiteColor
-                    ),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(15),
+                          topRight: Radius.circular(15),
+                        ),
+                        color: whiteColor),
                     child: Text(components.text ?? ''),
                   );
                 }),
